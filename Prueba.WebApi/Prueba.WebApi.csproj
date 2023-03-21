@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.15">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Prueba.Adapters\Prueba.Adapters.csproj" />
+    <ProjectReference Include="..\Prueba.Application\Prueba.Application.csproj" />
+    <ProjectReference Include="..\Prueba.Domain.Ports\Prueba.Domain.Ports.csproj" />
+    <ProjectReference Include="..\Prueba.Domain\Prueba.Domain.csproj" />
+    <ProjectReference Include="..\Prueba.WebApi.Contracts\Prueba.WebApi.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

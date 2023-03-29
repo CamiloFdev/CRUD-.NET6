@@ -2,9 +2,6 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Prueba.WebApi.Contracts;
 using Prueba.Application.UseCases;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
-using System.Security.Cryptography.X509Certificates;
-using static Prueba.Application.UseCases.ListUser;
 
 namespace Prueba.WebApi.Controllers
 {
@@ -65,7 +62,7 @@ namespace Prueba.WebApi.Controllers
         {
             var lista = await sender.Send(new DeleteUser.Command(Id));
             return Ok(lista);
-
+           
         }
     }
 }

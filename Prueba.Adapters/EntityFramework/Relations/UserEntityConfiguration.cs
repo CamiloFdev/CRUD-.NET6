@@ -18,7 +18,7 @@ namespace Prueba.Adapters.EntityFramework.Relations
             builder.Property(x => x.Id).HasColumnName("Id").ValueGeneratedOnAdd();
             builder.Property(x => x.FirstName).HasColumnName("FirstName").HasMaxLength(50).IsRequired();
             builder.Property(x => x.LastName).HasColumnName("LastName").HasMaxLength(50).IsRequired();
-            builder.Property(x => x.mail).HasColumnName("mail").HasMaxLength(50).IsRequired();
+            builder.Property(x => x.Mail).HasColumnName("mail").HasMaxLength(50).IsRequired();
 
         }
 

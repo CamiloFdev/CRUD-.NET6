@@ -2,12 +2,6 @@
 using MediatR;
 using Prueba.Domain.AggregateRoots;
 using Prueba.Domain.Ports.DataAccess;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Prueba.Application.UseCases
 {
@@ -24,12 +18,12 @@ namespace Prueba.Application.UseCases
                 _UnitOfWork = unitOfWork;
                 this.validator = validator;
             }
-            async Task <Unit> IRequestHandler<Command, Unit>.Handle(Command request, CancellationToken cancellationToken)
+            public async Task <Unit> Handle(Command request, CancellationToken cancellationToken)
             {
                 validator.ValidateAndThrow(request);
                 User user = new User(request.FirstName, request.LastName, request.mail);
 
-                _UnitOfWork.users.CreateUser(user);
+                _UnitOfWork.Users.CreateUser(user);
                 return Unit.Value;
 
             }

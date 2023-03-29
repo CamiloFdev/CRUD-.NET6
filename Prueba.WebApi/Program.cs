@@ -2,12 +2,10 @@ using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Prueba.Adapters.DataAccess;
 using Prueba.Adapters.EntityFramework;
 using Prueba.Domain.others;
 using Prueba.Domain.Ports.DataAccess;
-using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,12 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
-using Prueba.Domain.AggregateRoots;
 using Prueba.Domain.Ports.DataAccess;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Prueba.Domain.others;
 namespace Prueba.Application.UseCases
 {
@@ -24,32 +18,34 @@ namespace Prueba.Application.UseCases
                 this.validator = validator;
             }
 
-            async Task<Unit> IRequestHandler<Command, Unit>.Handle(Command request, CancellationToken cancellationToken)
+             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var ValidUser = await _UnitOfWork.users.GetUser(request.Id);
+                validator.ValidateAndThrow(request);
+                var ValidUser = await _UnitOfWork.Users.GetUser(request.Id);
 
                 if (ValidUser is null) throw BusinessException.NotFoundWithMessage("No se ha encontrado un usuario con este id");
 
-                 ValidUser = ValidUser.UpdateState(request.Id, request.FirstName, request.LastName, request.mail, ValidUser);
+                  ValidUser.UpdateState(request.FirstName, request.LastName, request.mail);
                
 
-                _UnitOfWork.users.UpdateUser(ValidUser);
+                _UnitOfWork.Users.UpdateUser(ValidUser);
 
                 return Unit.Value;
             }
-            public class Validator : AbstractValidator<Command>
+          
+        }
+        public class Validator : AbstractValidator<Command>
+        {
+
+            public Validator()
             {
+                RuleFor(e => e.Id)
+                    .NotEmpty().WithMessage("Input mail vacio");
 
-                public Validator()
-                {
-                    RuleFor(e => e.Id)
-                        .NotEmpty().WithMessage("Input mail vacio");
+                RuleFor(e => e.FirstName)
+                    .NotEmpty().WithMessage("Input Nombre vacio");
 
-                    RuleFor(e => e.FirstName)
-                        .NotEmpty().WithMessage("Input Nombre vacio");
-
-                    RuleFor(e => e.LastName).NotEmpty().WithMessage("Input Nombre vacio");
-                }
+                RuleFor(e => e.LastName).NotEmpty().WithMessage("Input Apellido vacio");
             }
         }
     }

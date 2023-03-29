@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using Microsoft.EntityFrameworkCore;
 using Prueba.Adapters.EntityFramework;
 using Prueba.Domain.AggregateRoots;

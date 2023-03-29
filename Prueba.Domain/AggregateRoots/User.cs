@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace Prueba.Domain.AggregateRoots
 {
@@ -12,14 +8,14 @@ namespace Prueba.Domain.AggregateRoots
         public string FirstName { get; protected set; }
         public string LastName { get; protected set; }
 
-        public string mail { get; protected set; }
+        public string Mail { get; protected set; }
 
         public User(string firstName, string lastName, string mail)
         {
 
             FirstName = firstName;
             LastName = lastName;
-            this.mail = mail;
+            this.Mail = mail;
         }
 
         public User(int id, string firstName, string lastName, string mail)
@@ -27,19 +23,16 @@ namespace Prueba.Domain.AggregateRoots
             Id = id;
             FirstName = firstName;
             LastName = lastName;
-            this.mail = mail;
+            this.Mail = mail;
 
         }
 
-        public  User UpdateState(int id, string firstName, string lastName, string mail, User user)
+        public void UpdateState( string firstName, string lastName, string mail)
         {
-            user.Id = id;
-            user.FirstName = firstName;
-            user.LastName = lastName;
-            user.mail = mail;
-
-
-            return user;
+           
+            FirstName = firstName;
+            LastName = lastName;
+            Mail = mail;
         }
     }
 

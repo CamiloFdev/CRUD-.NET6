@@ -1,39 +1,35 @@
-﻿using FluentValidation;
+﻿
 using MediatR;
-using Prueba.Domain.AggregateRoots;
+using Prueba.Domain.others;
 using Prueba.Domain.Ports.DataAccess;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Prueba.Application.UseCases
 {
     public class GetUser
     {
-        public record Dto(User Users);
+        public record Dto(int Id, string FirstName, string LastName, string mail);
 
 
         public record Query(int Id) : IRequest<GetUser.Dto>;
         public class Handler : IRequestHandler<GetUser.Query, GetUser.Dto>
         {
             private readonly IApplicationUnitOfWork _UnitOfWork;
-            //private readonly IValidator<Query> validator;
+            
 
 
             public Handler(IApplicationUnitOfWork unitOfWork)
             {
                 _UnitOfWork = unitOfWork;
-                //this.validator = validator;
+               
 
             }
 
-            async Task<Dto>IRequestHandler<Query,Dto>.Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Dto> Handle(Query request, CancellationToken cancellationToken)
             {
-                var users = await _UnitOfWork.users.GetUser(request.Id);
-
-                return new Dto(users);
+                
+                var ValidUser = await _UnitOfWork.Users.GetUser(request.Id);
+                if (ValidUser is null) throw BusinessException.NotFoundWithMessage("No se ha encontrado un usuario con este id");
+                return new Dto(ValidUser.Id, ValidUser.FirstName, ValidUser.LastName, ValidUser.Mail);
             }
         }
 
